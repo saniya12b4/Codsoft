@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessingGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        int playAgain;
+        do {
+            // Generate a random number within the range 1 to 100
+            int numberToGuess = random.nextInt(100) + 1;
+            
+            // Set the number of attempts
+            int attempts = 10;
+            boolean correctGuess = false;
+            
+            System.out.println("Welcome to the Guessing Game!");
+            System.out.println("Try to guess the number between 1 and 100.");
+            
+            // Game loop
+            while (attempts > 0 && !correctGuess) {
+                System.out.print("You have " + attempts + " attempts left. Enter your guess: ");
+                int userGuess = scanner.nextInt();
+                
+                // Compare the user's guess with the number to guess
+                if (userGuess < numberToGuess) {
+                    System.out.println("Too low! Try again.");
+                } else if (userGuess > numberToGuess) {
+                    System.out.println("Too high! Try again.");
+                } else {
+                    correctGuess = true;
+                    System.out.println("Congratulations! You've guessed the correct number.");
+                }
+                
+                attempts--;
+            }
+            
+            // If the user didn't guess correctly within the attempts
+            if (!correctGuess) {
+                System.out.println("Sorry, you've run out of attempts! The correct number was: " + numberToGuess);
+            }
+            
+            // Ask if the user wants to play again
+            System.out.print("Do you want to play again? (1 for Yes, 0 for No): ");
+            playAgain = scanner.nextInt();
+            
+        } while (playAgain == 1);
+        
+        System.out.println("Thanks for playing! Goodbye.");
+        scanner.close();
+    }
+}
